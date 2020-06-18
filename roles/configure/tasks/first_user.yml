@@ -1,0 +1,13 @@
+---
+- name: create user
+  user:
+    name: "{{ first_user }}"
+    shell: /bin/bash
+    groups: wheel 
+    append: yes
+
+- name: set authorized key for {{ first_user }}
+  authorized_key:
+    user: "{{ first_user }}"
+    state: present 
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"

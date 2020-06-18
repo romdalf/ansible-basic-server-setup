@@ -1,0 +1,16 @@
+- name: install fail2ban
+  dnf: 
+    name: fail2ban
+    state: latest 
+
+- name: deploy fail2ban config file template
+  template:
+    src: jail.local.j2
+    dest: /etc/fail2ban/jail.local
+
+- name: enable and start fail2ban service
+  service:
+    name: fail2ban
+    enabled: yes
+    state: restarted
+

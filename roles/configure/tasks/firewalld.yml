@@ -1,0 +1,23 @@
+---
+- name: enable and start firewalld 
+  service:
+    name: firewalld
+    enabled: yes
+    state: restarted
+
+- name: clean firewalld rules dhcpv6-client
+  firewalld:
+    service: dhcpv6-client
+    permanent: yes
+    state: disabled 
+
+
+  
+
+
+#  49  firewall-cmd --zone=public --remove-service="dhcpv6-client" --permanent
+#  50  firewall-cmd --zone=public --remove-service="cockpit" --permanent
+  #  53  firewall-cmd --zone=public --add-rich-rule 'rule family="ipv4" service name="cockpit" source address="80.200.222.41" accept' --permanent
+  #  54  firewall-cmd --zone=public --add-rich-rule 'rule family="ipv4" service name="https" source address="80.200.222.41" accept' --permanent
+  #  55  firewall-cmd --zone=public --add-rich-rule 'rule family="ipv4" service name="http" source address="80.200.222.41" accept' --permanent
+  #  56  firewall-cmd --reload

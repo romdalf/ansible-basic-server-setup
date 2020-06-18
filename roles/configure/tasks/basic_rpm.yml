@@ -1,0 +1,16 @@
+---
+- name: enable EPEL
+  dnf: 
+    name: "epel-release"
+    state: latest 
+
+- name: Update server
+  dnf:
+    name: "*"
+    state: latest 
+
+- name: Install fail2ban
+  dnf: 
+    name: fail2ban
+    state: latest 
+  notify: start fail2ban service

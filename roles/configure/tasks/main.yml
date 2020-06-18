@@ -1,0 +1,10 @@
+---
+- name: rpm based distribution
+  block: 
+    - include_tasks: basic_rpm.yml
+    - include_tasks: fail2ban_rpm.yml
+    - include_tasks: firewalld.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- include_tasks: basic_config.yml
+- include_tasks: first_user.yml

@@ -1,0 +1,7 @@
+[server]
+<ip> ansible_user=root ansible_ssh_pass=<password>
+
+[server:vars]
+hostname=<hostname>
+domain=<yourdomain>
+first_user=<first_user_to_use_with_sudo_instead_of_root>
