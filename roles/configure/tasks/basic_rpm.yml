@@ -1,16 +1,25 @@
 ---
-- name: enable EPEL
-  dnf: 
-    name: "epel-release"
-    state: latest 
+- name: deploying EPEL and updates 
+  block: 
+  - name: enable EPEL for major release {{ ansible_distribution_major_version }}
+    dnf: 
+      name: "epel-release"
+      state: latest 
+  - name: enable EPEL for major release {{ ansible_distribution_major_version }}
+    dnf: 
+      name: "epel-release"
+      state: latest 
+  when: ansible_distribution_major_version >= '8'
 
-- name: Update server
-  dnf:
-    name: "*"
-    state: latest 
+- name: deploying EPEL and updates 
+  block: 
+  - name: enable EPEL for major release {{ ansible_distribution_major_version }}
+    yum: 
+      name: "epel-release"
+      state: latest 
+  - name: enable EPEL for major release {{ ansible_distribution_major_version }}
+    yum: 
+      name: "epel-release"
+      state: latest 
+  when: ansible_distribution_major_version <= '7'
 
-- name: Install fail2ban
-  dnf: 
-    name: fail2ban
-    state: latest 
-  notify: start fail2ban service

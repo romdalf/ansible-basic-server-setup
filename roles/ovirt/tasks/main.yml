@@ -1,23 +1,19 @@
 ---
 - name: enable ovirt engine repositories
-  dnf:
+  yum:
     name: https://resources.ovirt.org/pub/yum-repo/ovirt-release44.rpm
     state: present
 
 - name: enable module for javapackages-tools
-  dnf: 
-    name: javapackages-tools
-    install_repoquery: yes
+  command: yum module -y enable javapackages-tools
+
+- name: enable module for pki-deps 
+  command: yum module -y enable pki-deps
 
 - name: enable module for postgresql 
-  dnf: 
-    name: postgresql
-    install_repoquery: yes
-
-
-
+  command: yum module -y enable postgresql:12
 
 - name: isntall ovirt engine 
-  dnf: 
+  yum: 
     name: ovirt-engine
     state: latest 
