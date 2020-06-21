@@ -12,7 +12,7 @@ Currently, this Ansible plays configure the followings:
 
 | provider | roles         | status  | missing feature |
 |:---------|:--------------|:--------|:----------------|
-| Hetzner  | provision     | 90% | last task is about checking installation status by waiting for port 22 to become alive but this is not working because of the way the provisioning is wokirng with a "rescue" mode
+| Hetzner  | provision     | 90% | last task is about checking installation status by waiting for port 22 to become alive but fails due to rescue mode being used for the installation and providing ssh capabilities
 |          | configuration | 50% | the configuration is only working with RPM based distribution (with yum or dnf)
 |          |               |     | still need to have server password to perform the confirmation however working in retrieving the created password during installation only based on the server IP
 |          | ovirt         | 0%   | not yet started
