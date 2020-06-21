@@ -1,6 +1,4 @@
-# ansible-basic-server-setup
-
-Currently, this Ansible plays configure the followings:
+## ansible-basic-server-setup
 
 | role | purpose|
 |:-----|:-------|
