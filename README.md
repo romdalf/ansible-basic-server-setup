@@ -8,3 +8,10 @@ Currently, this Ansible plays configure the followings:
   - jail.local.j2 can be modified to fit needs
 - roles/ovirt; role to install ovirt engine on RHEL7 (currently not sync - still testing - don't use!)
 
+## usage
+
+| Provider | Working Roles | Inventory |
+|:---------|:--------------|:----------|
+| Hetzner  | provision     | use the group [hetzner] and [hetzner:vars] to 
+|          | configuration | specify the IP(s) and the webservice credentials
+|          | ~~ovirt~~     | see https://wiki.hetzner.de/index.php/Robot_Webservice
