@@ -1,0 +1,52 @@
+---
+- name: Hetzner - check facts 
+  uri:
+    url: "https://robot-ws.your-server.de/boot/{{ ansible_host }}/linux"
+    user: "{{ hetz_webapp_user }}"
+    password: "{{ hetz_webapp_pass }}"
+  register: hetzner_check
+
+- name: Hetzner - check if server is active for reinstallation
+  debug:
+    var: hetzner_check.json.linux.active
+
+- name: Hetzner - set the operating system for reinstallation 
+  uri:
+    url: "https://robot-ws.your-server.de/boot/{{ ansible_host }}/linux"
+    body: "dist={{ hetz_os }}&arch={{ hetz_arch }}&lang={{ hetz_lang }}"
+    body_format: form-urlencoded
+    method: POST
+    user: "{{ hetz_webapp_user }}"
+    password: "{{ hetz_webapp_pass }}"
+  register: hetzner_server
+  when: hetzner_check.json.linux.active != true
+
+- name: Hetzner - get root server password 
+  uri:
+    url: "https://robot-ws.your-server.de/boot/{{ ansible_host }}/linux"
+    user: "{{ hetz_webapp_user }}"
+    password: "{{ hetz_webapp_pass }}"
+  register: hetzner_check
+
+- name: Hetzner - new root password
+  debug:
+    var: hetzner_check.json.linux.password
+
+- name: Hetzner - HW reset the server to start resinstallation 
+  uri:
+    url: "https://robot-ws.your-server.de/reset/{{ ansible_host }}"
+    body: "type=hw"
+    body_format: form-urlencoded
+    method: POST
+    user: "{{ hetz_webapp_user }}"
+    password: "{{ hetz_webapp_pass }}"
+  register: hetzner_server
+  when: hetzner_check.json.linux.active == true
+  
+- name: Hetzner - Wait 600 seconds for port 22 to become open
+  wait_for:
+    port: 22
+    host: '{{ ansible_host }}'
+    delay: 10
+    timeout: 600
+  connection: local

@@ -1,7 +1,14 @@
-[server]
+[hetzner]
 <ip> ansible_user=root ansible_ssh_pass=<password>
 
-[server:vars]
+[hetzner:vars]
 hostname=<hostname>
 domain=<yourdomain>
 first_user=<first_user_to_use_with_sudo_instead_of_root>
+
+# hetzner server provider
+hetz_webapp_user=                           # to be created in Settings/Webservice and app settings/Webservice/app user 
+hetz_webapp_pass=                           #
+hetz_os="CentOS 7.8 minimal"                # valid options are ["Arch Linux latest minimal","CentOS 7.8 minimal","CentOS 8.1 minimal","Debian 10.4 LAMP","Debian 10.4 minimal","Debian 9.12 minimal","Ubuntu 16.04.5 LTS minimal","Ubuntu 18.04.4 LTS minimal","Ubuntu 18.04.4 LTS Nextcloud","Ubuntu 20.04 LTS minimal"]
+hetz_arch=64                                # valid options are [64]
+hetz_lang=en                                # valid options are [en]

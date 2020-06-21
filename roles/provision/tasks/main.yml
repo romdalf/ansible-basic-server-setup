@@ -1,0 +1,5 @@
+---
+- name: Hetzner Provisioning
+  block: 
+    - include_tasks: hetzner.yml
+  when: server_provider == 'hetzner'
