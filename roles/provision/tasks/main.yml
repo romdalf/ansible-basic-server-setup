@@ -2,4 +2,4 @@
 - name: Hetzner Provisioning
   block: 
     - include_tasks: hetzner.yml
-  when: server_provider == 'hetzner'
+  when: group_names[0] == 'hetzner'
